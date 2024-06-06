@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Oasis Pizza</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4B6F44;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4B6F44;
+            color: white;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .checkout {
+            text-align: center;
+        }
+
+        .checkout button {
+            background-color: #4B6F44;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .checkout button:hover {
+            background-color: #3a5333;
+        }
+
+        .back-to-menu {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-menu button {
+            background-color: #333;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .back-to-menu button:hover {
+            background-color: #555;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-controls button {
+            background-color: #4B6F44;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #3a5333;
+        }
+
+        .quantity-display {
+            margin: 0 5px;
+            font-size: 16px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .price {
+            font-size: 16px;
+        }
+
+        .price::before {
+            content: "Rs ";
+        }
+
+        .total-amount::before {
+            content: "Total: Rs ";
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="signin.html">Sign In</a>
+        </nav>
+    </header>
+
+    <h1>Shopping Cart</h1>
+
+    <div class="cart-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically generated here -->
+            </tbody>
+        </table>
+        <div class="total total-amount" id="cart-total">
+            <!-- Cart total will be dynamically generated here -->
+        </div>
+        <div class="checkout">
+            <button onclick="checkout()">Checkout</button>
+        </div>
+        <div class="back-to-menu">
+            <a href="menu.html"><button>Back to Menu</button></a>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            let cartTotal = 0;
+
+            // Retrieve cart data from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            cart.forEach(item => {
+                const itemTotal = item.quantity * item.price;
+                cartTotal += itemTotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity('${item.name}', -1)">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.name}', 1)">+</button>
+                        </div>
+                    </td>
+                    <td class="price">${item.price.toFixed(2)}</td>
+                    <td class="price">${itemTotal.toFixed(2)}</td>
+                `;
+                cartItemsContainer.appendChild(row);
+            });
+
+            // Display the total
+            const totalContainer = document.getElementById('cart-total');
+            totalContainer.textContent = `${cartTotal.toFixed(2)}`;
+            // Store total in localStorage
+            localStorage.setItem('cartTotal', cartTotal.toFixed(2));
+        }
+
+        function updateQuantity(itemName, change) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.name === itemName);
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    // Remove item if quantity becomes zero or negative
+                    cart.splice(itemIndex, 1);
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart(); // Reload the cart
+            }
+        }
+
+        function checkout() {
+            // Redirect to customer details page
+            window.location.href = 'customerdetails.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>

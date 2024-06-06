@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details - Oasis Pizza</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4B6F44;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .customer-details-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-field input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: #4B6F44;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #3a5333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="signin.html">Sign In</a>
+        </nav>
+    </header>
+
+    <div class="customer-details-container">
+        <h1>Enter Your Details</h1>
+        <form id="customer-details-form">
+            <div class="form-field">
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-field">
+                <input type="text" id="address" placeholder="Enter your address" required>
+            </div>
+            <div class="form-field">
+                <input type="text" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-field">
+                <input type="text" id="phone" placeholder="Enter your phone number" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('customer-details-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Retrieve customer details
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // You can perform validation here if needed
+
+            // Redirect to payment page with customer details as query parameters
+            window.location.href = `payment.html?name=${name}&address=${address}&email=${email}&phone=${phone}`;
+        });
+    </script>
+</body>
+</html>

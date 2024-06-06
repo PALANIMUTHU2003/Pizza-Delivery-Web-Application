@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis Pizza - Sign In</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4B6F44;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .auth-container {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .auth-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .auth-container form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .auth-container form.active {
+            display: block;
+        }
+
+        .auth-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .auth-container button {
+            padding: 10px 20px;
+            background-color: #4B6F44;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .auth-container button:hover {
+            background-color: #3b5a37;
+        }
+
+        .toggle-link {
+            margin-top: 10px;
+            cursor: pointer;
+            color: #4B6F44;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="signin.html" class="sign-in-btn">Sign In</a>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <h1>Oasis Pizza</h1>
+        
+        <!-- Sign In Form -->
+        <form id="sign-in-form" class="active">
+            <h2>Sign In</h2>
+            <input type="text" id="signin-username" placeholder="Username" required>
+            <input type="password" id="signin-password" placeholder="Password" required>
+            <button type="button" onclick="handleSignIn()">Log In</button>
+            <p class="toggle-link" onclick="toggleForms()">Don't have an account? Sign Up</p>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="sign-up-form">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-username" placeholder="Username" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+            <button type="button" onclick="handleSignUp()">Sign Up</button>
+            <p class="toggle-link" onclick="toggleForms()">Already have an account? Log In</p>
+        </form>
+    </div>
+
+    <script>
+        function toggleForms() {
+            document.getElementById('sign-in-form').classList.toggle('active');
+            document.getElementById('sign-up-form').classList.toggle('active');
+        }
+
+        function handleSignIn() {
+            // Add your sign-in logic here
+            alert('Log In Successful');
+            window.location.href = 'index.html';
+        }
+
+        function handleSignUp() {
+            // Add your sign-up logic here
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            alert('Sign Up Successful');
+            toggleForms();
+        }
+    </script>
+</body>
+</html>

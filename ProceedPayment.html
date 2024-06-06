@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Details</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .payment-details-container {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .payment-details-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .qr-code-container img {
+            width: 200px;
+            height: auto;
+        }
+
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #4B6F44;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: #3b5a37;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #back-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-details-container">
+        <h1>Payment Details</h1>
+        <div id="upi-details" class="hidden">
+            <div class="form-field">
+                <label for="upi-id">Enter UPI ID:</label>
+                <input type="text" id="upi-id" placeholder="Enter UPI ID" required>
+            </div>
+            <button id="proceed-upi" class="submit-btn">Proceed Payment</button>
+        </div>
+
+        <div id="card-payment" class="hidden">
+            <div class="form-field">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" placeholder="Enter card number" required>
+            </div>
+            <div class="form-field">
+                <label for="card-holder-name">Card Holder Name:</label>
+                <input type="text" id="card-holder-name" placeholder="Enter card holder name" required>
+            </div>
+            <div class="form-field">
+                <label for="expiry-date">Expiry Date (MM/YY):</label>
+                <input type="text" id="expiry-date" placeholder="Enter expiry date" required>
+            </div>
+            <div class="form-field">
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" placeholder="Enter CVV" required>
+            </div>
+            <button id="proceed-card" class="submit-btn">Proceed Payment</button>
+        </div>
+
+        <div id="qr-code" class="hidden">
+            <div class="qr-code-container">
+                <img src="qr_code_image.jpg" alt="QR Code">
+            </div>
+        </div>
+
+        <div id="cod-message" class="hidden">
+            <p>Cash on delivery selected. Thank you for choosing this option!</p>
+            <button id="proceed-cod" class="submit-btn">Proceed Payment</button>
+        </div>
+
+        <button id="back-btn" class="submit-btn">Back</button>
+    </div>
+
+    <script>
+        var queryParams = new URLSearchParams(window.location.search);
+        var paymentMethod = queryParams.get('method');
+
+        if (paymentMethod === 'upi') {
+            document.getElementById('upi-details').classList.remove('hidden');
+        } else if (paymentMethod === 'cod') {
+            document.getElementById('cod-message').classList.remove('hidden');
+        } else if (paymentMethod === 'card') {
+            document.getElementById('card-payment').classList.remove('hidden');
+        } else if (paymentMethod === 'qr') {
+            document.getElementById('qr-code').classList.remove('hidden');
+        }
+
+        document.getElementById('back-btn').addEventListener('click', function() {
+            window.history.back();
+        });
+
+        document.getElementById('proceed-upi').addEventListener('click', function() {
+            window.location.href = 'proceed_payment.html';
+        });
+
+        document.getElementById('proceed-card').addEventListener('click', function() {
+            window.location.href = 'proceed_payment.html';
+        });
+
+        document.getElementById('proceed-cod').addEventListener('click', function() {
+            window.location.href = 'proceed_payment.html';
+        });
+    </script>
+</body>
+</html>

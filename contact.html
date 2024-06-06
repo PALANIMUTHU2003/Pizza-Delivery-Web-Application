@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis Pizza - Sign In</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4B6F44;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        header nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Sign in section styles */
+        .sign-in-container {
+            background: white;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .sign-in-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .sign-in-container form label {
+            display: block;
+            margin: 0.5em 0 0.2em;
+        }
+
+        .sign-in-container form input, .sign-in-container form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .sign-in-container form button {
+            background-color: #4B6F44;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .sign-in-container form button:hover {
+            background-color: #3b5a37;
+        }
+
+        .message-box {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .sign-in-container p {
+            margin-top: 1em;
+        }
+
+        .sign-in-container p a {
+            color: #4B6F44;
+            text-decoration: none;
+        }
+
+        .sign-in-container p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="locations.html">Locations</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="signin.html">Sign In</a>
+        </nav>
+    </header>
+
+    <div class="sign-in-container">
+        <h2>Contact OASIS</h2>
+        <form>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="tel" id="mobile" placeholder="Mobile Number" required>
+            <textarea id="message" placeholder="Message" class="message-box"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
